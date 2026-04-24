@@ -1,0 +1,20 @@
+<div class="main-container">
+  <div class="container active"> <div class="form-container">
+      <form>
+        <h2 class="verify-title">Verificación de Seguridad</h2>
+        <p>Hola <strong>{{ usuario }}</strong>, ingresa el código enviado.</p>
+        
+        <input [(ngModel)]="codigo" 
+               name="codigo" 
+               placeholder="6 dígitos" 
+               class="input-code" 
+               maxlength="6">
+               
+        <div class="button-group">
+          <button type="button" (click)="verificar()">Verificar Código</button>
+          <button type="button" class="ghost" (click)='CerrarSesion()'>Cerrar Sesión</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

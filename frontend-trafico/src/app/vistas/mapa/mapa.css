@@ -1,0 +1,76 @@
+.mapa-container {
+  display: block;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+  text-align: center;
+}
+.h1 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+hr {
+  border: 0;
+  height: 2px;
+  background-color: #bdc3c7;
+  margin: 20px auto;
+  width: 50%;
+}
+.h2 {
+  color: #27ae60;
+  margin-bottom: 30px;
+}
+/* contendor del mapa*/
+.map-container {
+  display: block;
+  width: 100%;
+  height: 600px; 
+  position: relative;
+}
+/* Estilos para el mapa Leaflet */
+#map {
+  height: 100%; /* Asegura que el mapa ocupe todo el contenedor */
+  width: 100%;
+  border: 2px solid #003366;
+  border-radius: 8px;
+  z-index: 1;
+}
+
+/* Estilos para el contenedor del mapa */
+.leaflet-container {
+    height: 100%;
+    width: 100%;
+}
+/* Estilos para los elementos interactivos del mapa */
+.leaflet-interactive {
+  cursor: pointer !important;
+}
+
+/* 1. Definimos cómo se ve el círculo */
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #003366; 
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  margin: 10px auto;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.button {
+  display: flex;
+  border-radius: 25px;
+  justify-content: center;
+  background-color: #003366;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  gap : 10px;
+  margin: 20px auto;
+}
