@@ -1,0 +1,62 @@
+/* =============================================
+   GLOBAL RESET & DESIGN TOKENS
+   ============================================= */
+@import 'leaflet/dist/leaflet.css';
+@import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --font-main: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  /* Premium Color Palette */
+  --color-bg-light:      #f8fafc;
+  --color-bg-dark:       #0f172a;
+  
+  --color-primary:       #2563eb;
+  --color-primary-dark:  #1d4ed8;
+  --color-primary-light: #3b82f6;
+  
+  --color-accent:        #0ea5e9;
+  --color-success:       #10b981;
+  --color-warning:       #f59e0b;
+  --color-danger:        #ef4444;
+
+  /* Glassmorphism Tokens */
+  --glass-bg:            rgba(255, 255, 255, 0.75);
+  --glass-bg-dark:       rgba(15, 23, 42, 0.85);
+  --glass-border:        1px solid rgba(255, 255, 255, 0.3);
+  --glass-border-dark:   1px solid rgba(255, 255, 255, 0.1);
+  --glass-shadow:        0 8px 32px rgba(0, 0, 0, 0.1);
+  --glass-shadow-dark:   0 8px 32px rgba(0, 0, 0, 0.3);
+  --glass-blur:          blur(16px);
+
+  /* Typography Colors */
+  --text-main:           #1e293b;
+  --text-muted:          #64748b;
+  --text-light:          #f8fafc;
+
+  /* Transitions */
+  --transition-normal:   all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast:     all 0.15s ease-in-out;
+  
+  /* Borders */
+  --border-radius-sm:    8px;
+  --border-radius-md:    12px;
+  --border-radius-lg:    16px;
+  --border-radius-pill:  9999px;
+}
+
+html, body {
+  height: 100vh;
+  width: 100vw;
+  font-family: var(--font-main);
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--color-bg-dark);
+  overflow: hidden; /* Avoid scrolling on the whole page */
+  color: var(--text-main);
+}

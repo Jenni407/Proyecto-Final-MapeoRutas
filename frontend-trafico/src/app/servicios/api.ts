@@ -1,44 +1,50 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { NonNullableFormBuilder } from '@angular/forms';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class ApiService {
-  url = 'http://127.0.0.1:8000/api'; // URL base de tu API
-  
-  // Añadimos esta variable para guardar la info temporalmente
-  datosTraficoActual: any = null; 
-  usuarioActual: string = '';
-  codigo: string = '';
+  readonly url = 'http://127.0.0.1:8000/api';
 
-  constructor(private http: HttpClient) { }
+  datosTraficoActual: any = null;
+  usuarioActual: string = localStorage.getItem('usuario') || '';
+  codigo: string = localStorage.getItem('codigo_2fa') || '';
 
-login(user: string, pass: string) {
+  constructor(private http: HttpClient) {}
 
-    const body = { 
-      Nombre: user, 
-      Password: pass   
-    };
-    return this.http.post(`${this.url}/login`, body);
+  private getHeaders() {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({ Authorization: `Bearer ${token}` });
   }
+
+  login(user: string, pass: string) {
+    return this.http.post(`${this.url}/login`, { Nombre: user, Password: pass });
+  }
+
   register(user: string, pass: string, email: string) {
-    const body = { 
+    return this.http.post(`${this.url}/registrar`, {
       Nombre: user,
       Password: pass,
-      Correo: email
-    };
-  return this.http.post(`${this.url}/registrar`, body);
-}
-
-  getTrafico(depto: string, user: string, code: string) {
-   return this.http.get(`${this.url}/consultar/${depto}?usuario=${user}&codigo_ingresado=${code}`);
+      Correo: email,
+    });
   }
 
-getConteoPorDepto(depto: string) {
-// Usamos la variable this.url para ser consistentes
-    return this.http.get(`${this.url}/conteo/${depto}`);
-}
+  /** Estado del vial con autenticación 2FA */
+  getTrafico(depto: string, user: string, code: string) {
+    return this.http.get(
+      `${this.url}/consultar/${depto}?usuario=${user}&codigo_ingresado=${code}`
+    );
+  }
 
+  /**
+   * Conteo por tipo de vehículo desde SQL Server.
+   * Retorna: { carros, motos, camiones, camionetas, pickups, total }
+   */
+  getVehicularPorDepto(depto: string) {
+    return this.http.get(`${this.url}/vehicular/${depto}`);
+  }
+
+  /** Alias para compatibilidad hacia atrás */
+  getConteoPorDepto(depto: string) {
+    return this.getVehicularPorDepto(depto);
+  }
 }

@@ -1,0 +1,24 @@
+<header class="top-header">
+  <div class="header-title">
+    <i class="fas fa-map-marked-alt text-primary"></i>
+    <h1>Guate Tráfico</h1>
+  </div>
+  
+  <div class="header-actions">
+    <!-- Control de brillo para descanso visual -->
+    <div class="brightness-control" title="Ajustar brillo (Descanso visual)">
+      <i class="fas fa-sun" style="font-size: 10px;"></i>
+      <input type="range" min="30" max="100" [(ngModel)]="nivelBrillo" (input)="ajustarBrillo()" class="brightness-slider">
+      <i class="fas fa-sun" style="font-size: 16px;"></i>
+    </div>
+
+    <div class="user-profile">
+      <span class="user-name"><i class="fas fa-user-circle"></i> {{ Usuario }}</span>
+      <small *ngIf="token" class="token-status"><i class="fas fa-circle"></i> En línea</small>
+    </div>
+
+    <button class="logout-button" (click)="cerrarSesion()" title="Cerrar Sesión">
+      <i class="fas fa-sign-out-alt"></i>
+    </button>
+  </div>
+</header>

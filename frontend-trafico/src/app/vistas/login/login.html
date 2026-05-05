@@ -1,31 +1,43 @@
 <div class="main-container">
-  <div class="container" [class.active]="isRegisterActive" id="container">
-    
+  <!-- Fondo Decorativo Glassmorphism -->
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+
+  <div class="container glass" [class.active]="isRegisterActive" id="container">
+
     <div class="form-create">
-      <form>
+      <form class="glass-form">
+        <div class="form-logo">
+          <i class="fas fa-map-marked-alt text-primary"></i>
+          Guate Tráfico
+        </div>
         <h2>Crear Cuenta</h2>
         <span>Regístrate para obtener acceso</span>
         <input type="email" placeholder="Email" [(ngModel)]="email" name="emailReg" required>
         <input type="text" placeholder="Usuario" [(ngModel)]="usuario" name="usuarioReg" required>
         <input type="password" placeholder="Contraseña" [(ngModel)]="clave" name="claveReg" required>
-        <button type="button" (click)="registrar()">Registrarse</button>
+        <button type="button" class="btn-primary" (click)="registrar()">Registrarse</button>
       </form>
     </div>
 
     <div class="form-login">
-      <form>
+      <form class="glass-form">
+        <div class="form-logo">
+          <i class="fas fa-map-marked-alt text-primary"></i>
+          Guate Tráfico  
+        </div>
         <h2>Iniciar Sesión</h2>
         <span>Ingresa a tu cuenta</span>
-        <input type="text" placeholder="Email o Usuario" [(ngModel)]="usuario" name="usuarioLogin">
+        <input type="text" placeholder="Usuario" [(ngModel)]="usuario" name="usuarioLogin">
         <input type="password" placeholder="Contraseña" [(ngModel)]="clave" name="claveLogin">
         <a (click)="abrirRecuperar()" class="forgot" style="cursor: pointer;">¿Olvidaste tu contraseña?</a>
-        <button type="button" (click)="enviarLogin()">Entrar</button>
+        <button type="button" class="btn-primary" (click)="enviarLogin()">Entrar</button>
       </form>
     </div>
 
     <div class="overlay-container">
       <div class="overlay">
-        
+
         <div class="overlay-panel overlay-left">
           <h1>¿Ya eres parte?</h1>
           <p>Inicia sesión con tus credenciales para continuar.</p>
@@ -33,7 +45,7 @@
         </div>
 
         <div class="overlay-panel overlay-right">
-          <h1>¡Hola de nuevo!</h1>
+          <h1>¡Hola Bienvenido!</h1>
           <p>¿No tienes una cuenta aún? Únete a nosotros ahora.</p>
           <button class="ghost" (click)="toggleRegister(true)">Regístrate</button>
         </div>
@@ -41,4 +53,5 @@
       </div>
     </div>
 
-  </div> </div>
+  </div>
+</div>

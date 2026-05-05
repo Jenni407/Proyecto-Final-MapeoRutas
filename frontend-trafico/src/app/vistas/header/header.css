@@ -1,0 +1,134 @@
+.top-header {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  right: 20px;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--border-radius-lg);
+  padding: 0 24px;
+  z-index: 1000; /* Sobre el mapa */
+  box-sizing: border-box;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-title i {
+  font-size: 24px;
+  color: var(--color-primary);
+}
+
+.header-title h1 {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.user-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.user-name i {
+  color: var(--text-muted);
+}
+
+.token-status {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-success);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.token-status i {
+  font-size: 8px;
+}
+
+.logout-button {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--color-danger);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--border-radius-pill);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  transition: var(--transition-fast);
+}
+
+.logout-button:hover {
+  background-color: var(--color-danger);
+  color: white;
+  transform: scale(1.05);
+}
+
+.brightness-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--glass-bg);
+  padding: 6px 12px;
+  border-radius: var(--border-radius-pill);
+  border: 1px solid rgba(200, 200, 200, 0.2);
+  color: var(--text-main);
+  margin-right: 8px;
+}
+
+.brightness-slider {
+  -webkit-appearance: none;
+  width: 80px;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.brightness-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.brightness-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}

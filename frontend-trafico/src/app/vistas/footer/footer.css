@@ -1,0 +1,69 @@
+.footer-container {
+  position: absolute;
+  bottom: 20px;
+  right: 24px;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--border-radius-pill);
+  padding: 10px 20px;
+  z-index: 1000; /* Sobre el mapa */
+  transition: var(--transition-normal);
+} 
+
+.footer-container:hover {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer-section {
+  display: flex;
+  align-items: center;
+}
+
+.status-text {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-text i {
+  color: var(--color-primary);
+}
+
+.footer-separator {
+  width: 1px;
+  height: 16px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.footer-links {
+  display: flex;
+  gap: 12px;
+}
+
+.footer-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 14px;
+  transition: var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-links a:hover {
+  color: var(--color-primary);
+  transform: scale(1.1);
+}

@@ -1,21 +1,73 @@
 .main-container {
-  background: #f0f2f5;
+  /* Fondo premium: Ciudad de noche */
+  background-image: linear-gradient(135deg, rgba(15, 23, 42, 0.5), rgba(15, 23, 42, 0.4)), 
+                    url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?q=80&w=2000&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Formas decorativas de fondo (Glassmorphism) */
+.shape {
+  position: absolute;
+  filter: blur(80px);
+  z-index: 0;
+  border-radius: 50%;
+}
+
+.shape-1 {
+  width: 400px;
+  height: 400px;
+  background: #3b82f6; /* Blue 500 */
+  top: -100px;
+  left: -100px;
+  opacity: 0.3; /* Reducido de 0.6 */
+}
+
+.shape-2 {
+  width: 500px;
+  height: 500px;
+  background: #10b981; /* Emerald 500 */
+  bottom: -150px;
+  right: -100px;
+  opacity: 0.2; /* Reducido de 0.5 */
+}
+
+.shape-3 {
+  width: 300px;
+  height: 300px;
+  background: #8b5cf6; /* Violet 500 */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.2; /* Reducido de 0.4 */
 }
 
 .container {
-  background-color: #fff;
-  border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  /* Contenedor principal */
   position: relative;
-  overflow: hidden;
   width: 800px;
   max-width: 100%;
   min-height: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  z-index: 10;
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+}
+
+/* Efecto Glass para el contenedor */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* --- Formularios --- */
@@ -23,13 +75,16 @@
   position: absolute;
   top: 0;
   height: 100%;
-  transition: all 0.6s ease-in-out;
+  transition: all 0.25s ease-in-out;
 }
+
 /* El login está a la izquierda inicialmente */
 .form-login {
   left: 0;
   width: 50%;
   z-index: 2;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .form-create {
@@ -37,22 +92,25 @@
   width: 50%;
   opacity: 0;
   z-index: 1;
+  pointer-events: none;
 }
 
 /* --- Animación al activar Registro --- */
 .container.active .form-login {
   transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .container.active .form-create {
   transform: translateX(100%);
   opacity: 1;
   z-index: 5;
+  pointer-events: auto;
 }
 
 /* --- Diseño de lo de adentro de los formularios --- */
 form {
-  background-color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,36 +118,98 @@ form {
   padding: 0 40px;
   height: 100%;
   text-align: center;
+  background: transparent;
+  color: #fff;
 }
+
+.form-logo {
+  font-size: 40px;
+  margin-bottom: 15px;
+  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
+}
+
+form h2 {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #f8fafc;
+}
+
+form span {
+  font-size: 13px;
+  color: #cbd5e1;
+  margin-bottom: 20px;
+}
+
+/* Campos de texto con estilo glass */
 input {
-  background-color: #f4f7f6;
-  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 12px 15px;
   margin: 8px 0;
   width: 100%;
   border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  transition: all 0.3s ease;
 }
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.forgot {
+  color: #94a3b8;
+  font-size: 13px;
+  text-decoration: none;
+  margin: 15px 0;
+  transition: color 0.3s ease;
+}
+
+.forgot:hover {
+  color: #fff;
+}
+
 /* --- Botones --- */
 button {
   border-radius: 25px;
-  border: 1px solid #2980b9;
-  background-color: #2980b9;
-  color: #ffffff;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: bold;
   padding: 12px 45px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  transition: transform 80ms ease-in;
+  transition: transform 80ms ease-in, background 0.3s ease;
   cursor: pointer;
   margin-top: 15px;
 }
 
 button:active { transform: scale(0.95); }
 
+.btn-primary {
+  border: none;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+}
+
 button.ghost {
   background-color: transparent;
-  border-color: #ffffff;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+}
+
+button.ghost:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* --- Animación del Overlay --- */
@@ -100,28 +220,37 @@ button.ghost {
   width: 50%;
   height: 100%;
   overflow: hidden;
-  transition: transform 0.6s ease-in-out;
+  transition: transform 0.25s ease-in-out;
   z-index: 100;
+  /* Efecto Glass extra para el overlay contenedor */
+  border-radius: 0 20px 20px 0;
 }
 
 .container.active .overlay-container {
   transform: translateX(-100%);
+  border-radius: 20px 0 0 20px;
 }
 
 .overlay {
-  background: linear-gradient(to right, #2980b9, #16a085);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.4), rgba(30, 58, 138, 0.6));
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
   color: #ffffff;
   position: relative;
   left: -100%;
   height: 100%;
   width: 200%;
   transform: translateX(0);
-  transition: transform 0.6s ease-in-out;
+  transition: transform 0.25s ease-in-out;
 }
 
 .container.active .overlay {
   transform: translateX(50%);
+  border-left: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
+
 /* --- overlay los paneles que contienen el texto --- */
 .overlay-panel {
   position: absolute;
@@ -129,12 +258,27 @@ button.ghost {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 0 10px;
+  padding: 0 40px;
   text-align: center;
   top: 0;
   height: 100%;
   width: 50%;
-  transition: transform 0.6s ease-in-out;
+  transition: transform 0.25s ease-in-out;
+}
+
+.overlay-panel h1 {
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.overlay-panel p {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  margin: 20px 0 30px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
 .overlay-left { transform: translateX(-20%); }
@@ -148,10 +292,10 @@ button.ghost {
   font-size: 24px;
   text-align: center;
   letter-spacing: 5px;
-  color: #16a085;
-  border: 2px solid #e8f6f3;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.1);
 }
 
-.success-title { color: #27ae60; }
-.verify-title { color: #16a085; }
-
+.success-title { color: #10b981; }
+.verify-title { color: #3b82f6; }
