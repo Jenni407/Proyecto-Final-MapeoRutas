@@ -1,315 +1,139 @@
-/* ═══════════════════════════════════════════════════════
-   Layout Principal
-═══════════════════════════════════════════════════════ */
+
+/* --- Layout Principal --- */
 .dashboard-wrapper {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100vh; /* Ocupa toda la pantalla */
   width: 100%;
-  overflow: hidden;
-}
-
+  }
 .dashboard-grid {
   display: grid;
-  grid-template-columns: 340px 1fr;
-  gap: 20px;
-  padding: 90px 24px 20px 24px;
-  background:
-    linear-gradient(rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.88)),
-    url('https://images.unsplash.com/photo-1517621422896-1d11a686b206?q=80&w=2000&auto=format&fit=crop')
-    center / cover no-repeat;
-  flex: 1;
-  min-height: 0;
+  grid-template-columns: 360px 1fr; 
+  gap: 25px;
+  padding: 100px 30px 30px 30px; /* Ajusta el padding para dejar espacio al header */
+background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1517621422896-1d11a686b206?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
+  flex: 1; /* Esto obliga a la grid a ocupar todo el espacio entre header y footer */
+  min-height: 0; 
   box-sizing: border-box;
-  overflow: hidden;
 }
 
-/* ═══════════════════════════════════════════════════════
-   Sidebar
-═══════════════════════════════════════════════════════ */
+/* --- Columna Lateral --- */
 .sidebar-column {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  overflow-y: auto;
-  padding-right: 4px;
+  gap: 20px;
 }
-
 .search-card {
-  background: rgba(255, 255, 255, 0.07);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 22px;
-  border-radius: 14px;
-  color: #f1f5f9;
-  font-family: 'Inter', 'Segoe UI', sans-serif;
-}
-
-.search-card h3 {
-  margin: 0 0 18px;
-  font-size: 15px;
-  font-weight: 600;
-  color: #e2e8f0;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.search-card h3 i { color: #3b82f6; }
-
-.input-group { margin-bottom: 14px; }
-
-.input-group label {
-  display: block;
-  font-size: 11px;
-  font-weight: 500;
-  color: #94a3b8;
-  margin-bottom: 5px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.input-group input,
-.map-input {
-  width: 100%;
-  padding: 9px 12px;
-  background: rgba(255, 255, 255, 0.09);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 8px;
-  font-size: 13px;
-  color: #f1f5f9;
-  outline: none;
-  transition: border-color 0.2s, background 0.2s;
-  box-sizing: border-box;
-}
-
-.map-input:focus {
-  border-color: #3b82f6;
-  background: rgba(59, 130, 246, 0.1);
-}
-
-.map-input::placeholder { color: #64748b; }
-
-.button-actions { display: flex; flex-direction: column; gap: 8px; }
-
-.btn-buscar {
-  width: 100%;
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  color: white;
-  border: none;
-  padding: 11px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 13px;
-  transition: all 0.25s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-}
-
-.btn-buscar:hover {
-  background: linear-gradient(135deg, #1d4ed8, #1e40af);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
-}
-
-.btn-limpiar {
-  width: 100%;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #94a3b8;
-  padding: 9px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 13px;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-}
-
-.btn-limpiar:hover { border-color: #ef4444; color: #ef4444; }
-
-/* ── Route details card ────────────────────────────── */
-.route-details-card {
-  background: rgba(255, 255, 255, 0.07);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-left: 4px solid #3b82f6;
-  padding: 16px 18px;
-  border-radius: 14px;
-  color: #f1f5f9;
-}
-
-.detail-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
-}
-
-.badge-mejor {
-  background: linear-gradient(135deg, #2563eb, #0ea5e9);
-  color: white;
-  font-size: 10px;
-  font-weight: 700;
-  padding: 3px 8px;
-  border-radius: 20px;
-  letter-spacing: 0.08em;
-}
-
-.tiempo-total { margin: 0; font-size: 20px; font-weight: 700; color: #f1f5f9; }
-.llegada-estimada { margin: 6px 0 4px; font-size: 13px; color: #94a3b8; }
-.distancia-total  { margin: 0; font-size: 13px; color: #94a3b8; }
-
-/* ── Vehicle summary card ──────────────────────────── */
-.vehicle-summary-card {
-  background: rgba(255, 255, 255, 0.07);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 18px;
-  border-radius: 14px;
-  color: #f1f5f9;
-}
-
-.vehicle-summary-card h4 {
-  margin: 0 0 14px;
-  font-size: 13px;
-  font-weight: 600;
-  color: #94a3b8;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.vehicle-list { display: flex; flex-direction: column; gap: 8px; }
-
-.veh-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 13px;
-}
-
-.veh-icon  { font-size: 16px; }
-.veh-label { flex: 1; color: #cbd5e1; }
-.veh-count { font-weight: 700; font-size: 14px; }
-
-.veh-row.carro     { background: rgba(37,  99, 235, 0.15); } .veh-row.carro     .veh-count { color: #60a5fa; }
-.veh-row.moto      { background: rgba(249,115,  22, 0.15); } .veh-row.moto      .veh-count { color: #fb923c; }
-.veh-row.camion    { background: rgba(239, 68,  68, 0.15); } .veh-row.camion    .veh-count { color: #f87171; }
-.veh-row.camioneta { background: rgba( 34,197,  94, 0.15); } .veh-row.camioneta .veh-count { color: #4ade80; }
-.veh-row.pickup    { background: rgba(168, 85, 247, 0.15); } .veh-row.pickup    .veh-count { color: #c084fc; }
-
-.veh-total {
-  margin-top: 12px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  font-size: 12px;
-  color: #64748b;
-  text-align: right;
-}
-
-.veh-total strong { color: #e2e8f0; font-size: 14px; }
-
-/* ═══════════════════════════════════════════════════════
-   Columna del Mapa + Gráfico
-═══════════════════════════════════════════════════════ */
-.map-column {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  min-height: 0;
-  height: 100%;
-  overflow-y: auto;
-  padding-right: 4px;
-}
-
-/* Mapa ocupa ~65% del espacio disponible */
-.map-container-card {
-  flex: 1;
-  min-height: 400px; /* Altura mínima para que no se oculte */
   background: white;
-  border-radius: 14px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+/* --- Área del Mapa --- */
+.map-column {
+  height: 100%;
+  width: 100%;
+}
+
+.map-container-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   overflow: hidden;
+  height: 100%; /* Obligatorio */
   position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid #e0e0e0;
 }
 
 #map {
   width: 100%;
   height: 100%;
-  min-height: 400px;
   background-color: #e5e7eb;
-  z-index: 1;
+  z-index: 1; /* Asegura que el mapa esté en su nivel */
 }
 
-/* ── Gráfico de barras ─────────────────────────────── */
-.chart-container-card {
-  flex: 0 0 210px;         /* altura fija para el gráfico */
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  border-radius: 14px;
-  padding: 14px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+/* para el panel de trazar rutas*/
+.search-panel {
+  position: absolute;
+  top: 80px; /* Ajusta según el alto de tu header */
+  left: 20px;
+  z-index: 1000; /* Para que esté sobre el mapa */
+  width: 320px;
 }
 
-.chart-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.input-group {
+  margin-bottom: 15px;
 }
 
-.chart-title {
+.input-group label {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 5px;
+}
+.input-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+.btn-buscar {
+  width: 100%;
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.btn-buscar:hover {
+  background-color: #1557b0;
+}
+
+.btn-limpiar {
+  width: 100%;
+  margin-top: 10px;
+  background: none;
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.route-details-card {
+  margin-top: 15px;
+  padding: 15px;
+  background-color: white;
+  border-left: 4px solid #1a73e8;
+  border-radius: 4px;
+}
+
+.badge-mejor {
+  background-color: #1a73e8;
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.tiempo-total {
+  margin: 0;
+  font-size: 18px;
+  color: #202124;
+}
+
+.llegada-estimada {
+  margin: 5px 0;
   font-size: 13px;
-  font-weight: 600;
-  color: #94a3b8;
-  display: flex;
-  align-items: center;
-  gap: 7px;
+  color: #70757a;
 }
-
-.chart-title i { color: #3b82f6; }
-
-.chart-depto {
-  color: #60a5fa;
-  font-weight: 700;
-}
-
-.chart-loading {
-  font-size: 11px;
-  color: #60a5fa;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.chart-wrapper {
-  flex: 1;
-  min-height: 0;
-  position: relative;
-}
-
-.chart-wrapper canvas {
-  width: 100% !important;
-  height: 100% !important;
-}
-
-/* ═══════════════════════════════════════════════════════
-   Ocultar panel de instrucciones de Leaflet Routing
-═══════════════════════════════════════════════════════ */
+/* ELIMINAR LAS LETRAS NEGRAS POR COMPLETO */
 ::ng-deep .leaflet-routing-container,
 ::ng-deep .leaflet-routing-alternatives {
   display: none !important;
@@ -317,3 +141,4 @@
   width: 0 !important;
   height: 0 !important;
 }
+

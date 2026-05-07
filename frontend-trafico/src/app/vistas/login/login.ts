@@ -32,36 +32,30 @@ export class Login {
     this.isRegisterActive = active;
   }
 
+  // Función para iniciar sesión
   enviarLogin() {
-    this.api.login(this.usuario, this.clave).subscribe({
-      next: (res: any) => {
-        // GUARDAMOS EN LOCALSTORAGE para que persista al recargar
+  this.api.login(this.usuario, this.clave).subscribe({
+    next: (res: any) => {
       localStorage.setItem('usuario', res.usuario);
-      // Nota: Si tu API devuelve el token aquí, guárdalo:
-      localStorage.setItem('token', res.token);
-         // Guardamos el usuario actual
-        this.api.usuarioActual = res.usuario;
-        Swal.fire({
-          title: '¡Ingreso Exitoso!',
-          text: 'Se ha enviado un código a tú correo. Por favor, ingrésalo para continuar.',
-          icon: 'success',
-          confirmButtonText: 'Aceptar',
-          confirmButtonColor: '#3085d6',
-        }).then((result) => {
-          // Si el usuario confirma el mensaje, avanzamos al siguiente paso
-          if (result.isConfirmed) {
-            // VIAJAMOS AL NUEVO COMPONENTE
-            this.router.navigate(['/seguridad-codigo']);
-          }
-        });
-      },
-      error: (err) => {
-        Swal.fire('Error', 'Credenciales incorrectas', 'error');
-      }
-    });
-  }
-
-
+      localStorage.setItem('token', res.token); 
+      this.api.usuarioActual = res.usuario;
+      Swal.fire({
+        title: '¡Ingreso Exitoso!',
+        text: 'Se ha enviado un código a tu correo.',
+        icon: 'success',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#3085d6',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigate(['/seguridad-codigo']);
+        }
+      });
+    },
+    error: (err) => {
+      Swal.fire('Error', 'Credenciales incorrectas', 'error');
+    }
+  });
+}
   // Función para registrar un nuevo usuario
   registrar() {
     if (!this.usuario || !this.clave || !this.email) {

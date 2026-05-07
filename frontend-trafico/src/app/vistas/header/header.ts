@@ -12,25 +12,22 @@ import { ApiService } from '../../servicios/api';
   styleUrl: './header.css',
 })
 export class Header implements OnInit {
-  Usuario: string = '';
-  token: string | null = '';
-  nivelBrillo: number = 100;
-
+Usuario: string = '';
+  token: string | null = ''
+  nivelBrillo: number = 100; // Brillo por defecto al 100%
   constructor(private api: ApiService, private router: Router) {}
 
   ngOnInit() {
     // Obtenemos los datos del servicio o del storage
-    this.Usuario = this.api.usuarioActual || localStorage.getItem('usuario') || 'Invitado';
-    this.token = localStorage.getItem('token');
-    
-    // Restaurar el nivel de brillo previo
+  this.Usuario = this.api.usuarioActual || localStorage.getItem('usuario') || 'Invitado';
+  this.token = localStorage.getItem('token');
+  // Restaurar el nivel de brillo previo
     const savedBrightness = localStorage.getItem('app_brightness');
     if (savedBrightness) {
       this.nivelBrillo = parseInt(savedBrightness, 10);
       this.aplicarBrillo();
     }
-  }
-
+  } 
   ajustarBrillo() {
     this.aplicarBrillo();
     localStorage.setItem('app_brightness', this.nivelBrillo.toString());
@@ -56,10 +53,10 @@ export class Header implements OnInit {
   }
 
   cerrarSesion() {
-    // Limpiamos todo
-    localStorage.removeItem('token');
-    localStorage.removeItem('usuario');
-    this.api.usuarioActual = ''; // Limpiamos el servicio también
+   // Limpiamos todo
+  localStorage.removeItem('token');
+  localStorage.removeItem('usuario');
+  this.api.usuarioActual = ''; // Limpiamos el servicio también
     this.router.navigate(['/login']);
   }
 }

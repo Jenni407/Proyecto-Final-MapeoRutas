@@ -15,4 +15,14 @@ CREATE TABLE Usuarios (
 	FechaRegistro DATETIME DEFAULT GETDATE() --fecha de registro del usuario, por defecto es la fecha actual
 );
 GO
+--para jwt--
+USE MapaRutas;
+GO
+
+ALTER TABLE Usuarios 
+ADD CodigoRecuperacion NVARCHAR(6) NULL,
+    FechaExpiracionCodigo DATETIME NULL;
+GO
+SELECT * FROM Usuarios;
+
 

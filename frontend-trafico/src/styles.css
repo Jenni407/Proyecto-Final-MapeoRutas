@@ -1,9 +1,6 @@
 /* =============================================
    GLOBAL RESET & DESIGN TOKENS
    ============================================= */
-@import 'leaflet/dist/leaflet.css';
-@import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
-
 *, *::before, *::after {
   margin: 0;
   padding: 0;

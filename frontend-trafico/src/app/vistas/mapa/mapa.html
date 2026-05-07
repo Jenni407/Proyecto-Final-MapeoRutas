@@ -1,110 +1,45 @@
+
 <div class="dashboard-wrapper">
   <app-header></app-header>
 
   <main class="dashboard-grid">
-
-    <!-- ── Sidebar ────────────────────────────────────────── -->
     <aside class="sidebar-column">
-
+      
       <div class="search-card">
         <h3><i class="fas fa-route"></i> Planificar Ruta</h3>
-
+        
         <div class="input-group">
           <label>Punto de partida</label>
-          <input type="text" [(ngModel)]="origen"
-                 placeholder="Ej: Quiché" class="map-input">
+          <input type="text" [(ngModel)]="origen" placeholder="Ej: Quiché" class="map-input">
         </div>
 
         <div class="input-group">
           <label>Destino</label>
-          <input type="text" [(ngModel)]="destino"
-                 placeholder="Ej: Antigua Guatemala" class="map-input">
+          <input type="text" [(ngModel)]="destino" placeholder="Ej: Antigua Guatemala" class="map-input">
         </div>
 
         <div class="button-actions">
-          <button (click)="buscarRuta()" class="btn-buscar">
-            <i class="fas fa-search"></i> Trazar Ruta
-          </button>
-          <button (click)="limpiarRuta()" class="btn-limpiar" *ngIf="rutaTrazada">
-            <i class="fas fa-times"></i> Limpiar
-          </button>
+          <button (click)="buscarRuta()" class="btn-buscar">Trazar Ruta</button>
+          <button (click)="limpiarRuta()" class="btn-limpiar" *ngIf="rutaTrazada">Limpiar</button>
         </div>
       </div>
 
-      <!-- Detalles de ruta -->
       <div class="route-details-card" *ngIf="rutaTrazada && infoRuta">
         <div class="detail-header">
-          <span class="badge-mejor">MEJOR RUTA</span>
+          <span class="badge-mejor">MEJOR</span>
           <h4 class="tiempo-total">{{ infoRuta.tiempo }}</h4>
         </div>
-        <p class="llegada-estimada">Llegada estimada: <strong>{{ infoRuta.horaLlegada }}</strong></p>
-        <p class="distancia-total"><i class="fas fa-road"></i> {{ infoRuta.distancia }} km</p>
-      </div>
-
-      <!-- Resumen de vehículos (sidebar) -->
-      <div class="vehicle-summary-card" *ngIf="datosVehicular">
-        <h4><i class="fas fa-car"></i> {{ deptoSeleccionado || 'Guatemala' }}</h4>
-        <div class="vehicle-list">
-          <div class="veh-row carro">
-            <span class="veh-icon">🚗</span>
-            <span class="veh-label">Carro</span>
-            <span class="veh-count">{{ (datosVehicular.carros || 0) | number }}</span>
-          </div>
-          <div class="veh-row moto">
-            <span class="veh-icon">🏍️</span>
-            <span class="veh-label">Moto</span>
-            <span class="veh-count">{{ (datosVehicular.motos || 0) | number }}</span>
-          </div>
-          <div class="veh-row camion">
-            <span class="veh-icon">🚛</span>
-            <span class="veh-label">Camión</span>
-            <span class="veh-count">{{ (datosVehicular.camiones || 0) | number }}</span>
-          </div>
-          <div class="veh-row camioneta">
-            <span class="veh-icon">🚐</span>
-            <span class="veh-label">Camioneta</span>
-            <span class="veh-count">{{ (datosVehicular.camionetas || 0) | number }}</span>
-          </div>
-          <div class="veh-row pickup">
-            <span class="veh-icon">🛻</span>
-            <span class="veh-label">Pickup</span>
-            <span class="veh-count">{{ (datosVehicular.pickups || 0) | number }}</span>
-          </div>
-        </div>
-        <div class="veh-total">
-          Total histórico: <strong>{{ (datosVehicular.total || 0) | number }}</strong>
-        </div>
+        <p class="llegada-estimada">Llegada a las {{ infoRuta.horaLlegada }}</p>
+        <p class="distancia-total">{{ infoRuta.distancia }} km</p>
       </div>
 
     </aside>
 
-    <!-- ── Área mapa + gráfico ────────────────────────────── -->
     <section class="map-column">
-
-      <!-- Mapa -->
       <div class="map-container-card">
         <div id="map"></div>
       </div>
-
-      <!-- Gráfico de barras -->
-      <div class="chart-container-card">
-        <div class="chart-header">
-          <span class="chart-title">
-            <i class="fas fa-chart-bar"></i>
-            Tráfico por Tipo de Vehículo
-            <span *ngIf="deptoSeleccionado" class="chart-depto">— {{ deptoSeleccionado }}</span>
-          </span>
-          <span *ngIf="cargandoGrafico" class="chart-loading">
-            <i class="fas fa-spinner fa-spin"></i> Actualizando...
-          </span>
-        </div>
-        <div class="chart-wrapper">
-          <canvas id="trafficChart"></canvas>
-        </div>
-      </div>
-
     </section>
-
   </main>
 
   <app-footer></app-footer>
