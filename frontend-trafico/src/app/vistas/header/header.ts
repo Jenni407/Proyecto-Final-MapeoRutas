@@ -56,7 +56,6 @@ Usuario: string = '';
    // Limpiamos todo
   localStorage.removeItem('token');
   localStorage.removeItem('usuario');
-  this.api.usuarioActual = ''; // Limpiamos el servicio también
     this.router.navigate(['/login']);
   }
 }

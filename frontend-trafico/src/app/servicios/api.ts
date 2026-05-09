@@ -7,8 +7,18 @@ import { Injectable } from '@angular/core';
 export class ApiService {
   url = 'http://127.0.0.1:8000/api';
   datosTraficoActual: any = null;
-  usuarioActual: string = localStorage.getItem('Usuario') || '';
-  codigo: string = '';
+get usuarioActual(): string {
+    return localStorage.getItem('usuario') || '';
+  }
+
+  get codigo(): string {
+    return localStorage.getItem('codigo_2fa') || '';
+  }
+
+  // Esto permite que otras partes de la app sigan asignando valores si es necesario
+  set codigo(val: string) {
+    localStorage.setItem('codigo_2fa', val);
+  }
 
   constructor(private http: HttpClient) { }
 

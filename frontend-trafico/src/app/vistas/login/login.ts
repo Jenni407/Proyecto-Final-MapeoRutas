@@ -38,24 +38,26 @@ export class Login {
     next: (res: any) => {
       localStorage.setItem('usuario', res.usuario);
       localStorage.setItem('token', res.token); 
-      this.api.usuarioActual = res.usuario;
+      this.api.codigo = ''; // Limpiar cualquier código previo
+
       Swal.fire({
         title: '¡Ingreso Exitoso!',
         text: 'Se ha enviado un código a tu correo.',
         icon: 'success',
-        confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#3085d6',
-      }).then((result) => {
-        if (result.isConfirmed) {
+        timer: 2500, 
+        timerProgressBar: true, 
+        showConfirmButton: false, 
+      }).then(() => {
           this.router.navigate(['/seguridad-codigo']);
         }
-      });
+      );
     },
     error: (err) => {
       Swal.fire('Error', 'Credenciales incorrectas', 'error');
     }
   });
-}
+  }
+
   // Función para registrar un nuevo usuario
   registrar() {
     if (!this.usuario || !this.clave || !this.email) {

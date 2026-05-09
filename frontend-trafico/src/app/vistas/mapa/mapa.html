@@ -1,23 +1,19 @@
-
 <div class="dashboard-wrapper">
   <app-header></app-header>
 
   <main class="dashboard-grid">
     <aside class="sidebar-column">
-      
+
       <div class="search-card">
         <h3><i class="fas fa-route"></i> Planificar Ruta</h3>
-        
         <div class="input-group">
           <label>Punto de partida</label>
           <input type="text" [(ngModel)]="origen" placeholder="Ej: Quiché" class="map-input">
         </div>
-
         <div class="input-group">
           <label>Destino</label>
           <input type="text" [(ngModel)]="destino" placeholder="Ej: Antigua Guatemala" class="map-input">
         </div>
-
         <div class="button-actions">
           <button (click)="buscarRuta()" class="btn-buscar">Trazar Ruta</button>
           <button (click)="limpiarRuta()" class="btn-limpiar" *ngIf="rutaTrazada">Limpiar</button>
@@ -26,11 +22,70 @@
 
       <div class="route-details-card" *ngIf="rutaTrazada && infoRuta">
         <div class="detail-header">
-          <span class="badge-mejor">MEJOR</span>
+          <span class="badge-mejor">MEJOR RUTA</span>
           <h4 class="tiempo-total">{{ infoRuta.tiempo }}</h4>
+          <p class="distancia-total">{{ infoRuta.distancia }} km · Llegada {{ infoRuta.horaLlegada }}</p>
         </div>
-        <p class="llegada-estimada">Llegada a las {{ infoRuta.horaLlegada }}</p>
-        <p class="distancia-total">{{ infoRuta.distancia }} km</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card stat-total">
+          <div class="stat-icon"><i class="fas fa-car"></i></div>
+          <div class="stat-info">
+            <span class="stat-value">{{ stats.total | number }}</span>
+            <span class="stat-label">Vehículos en ruta</span>
+          </div>
+        </div>
+        <div class="stat-card stat-danger">
+          <div class="stat-icon"><i class="fas fa-exclamation-triangle"></i></div>
+          <div class="stat-info">
+            <span class="stat-value">{{ stats.criticos + stats.alto }}</span>
+            <span class="stat-label">Congestionados</span>
+          </div>
+        </div>
+        <div class="stat-card stat-warning">
+          <div class="stat-icon"><i class="fas fa-clock"></i></div>
+          <div class="stat-info">
+            <span class="stat-value">{{ stats.medio }}</span>
+            <span class="stat-label">Moderados</span>
+          </div>
+        </div>
+        <div class="stat-card stat-success">
+          <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+          <div class="stat-info">
+            <span class="stat-value">{{ stats.bajo }}</span>
+            <span class="stat-label">Fluidos</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ranking-card">
+        <h3><i class="fas fa-list"></i> Top Congestión</h3>
+        <div class="ranking-list">
+          <div class="ranking-item" *ngFor="let d of topCongestion.slice(0, 8); let i = index">
+            <span class="rank-number" [class.top-3]="i < 3">{{ i + 1 }}</span>
+            <div class="rank-info">
+              <span class="rank-name">{{ d.nombre }}</span>
+              <div class="rank-bar-bg">
+                <div class="rank-bar-fill" [style.width.%]="(d.vehiculos_ahora / (topCongestion[0]?.vehiculos_ahora || 1)) * 100" [style.background]="getTraficoColor(d.nivel)"></div>
+              </div>
+            </div>
+            <span class="rank-value">{{ (d.vehiculos_ahora / 1000).toFixed(0) }}k</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-charts">
+        <div class="chart-header">
+          <div class="chart-tabs">
+            <button [class.active]="selectedChart === 'bar'" (click)="selectChart('bar')" class="chart-tab">Barras</button>
+            <button [class.active]="selectedChart === 'donut'" (click)="selectChart('donut')" class="chart-tab">Pastel</button>
+            <button [class.active]="selectedChart === 'line'" (click)="selectChart('line')" class="chart-tab">Tendencia</button>
+          </div>
+        </div>
+        <div class="chart-canvas-wrapper">
+          <canvas #chartCanvas></canvas>
+        </div>
       </div>
 
     </aside>
@@ -38,6 +93,11 @@
     <section class="map-column">
       <div class="map-container-card">
         <div id="map"></div>
+        <div class="map-legend">
+          <div class="legend-item"><span class="legend-dot" style="background:#10b981"></span> Fluido</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#f59e0b"></span> Moderado</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#dc3545"></span> Pesado</div>
+        </div>
       </div>
     </section>
   </main>

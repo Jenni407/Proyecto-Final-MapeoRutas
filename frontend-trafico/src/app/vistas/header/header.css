@@ -1,5 +1,5 @@
 .top-header {
-  position: absolute;
+  position: fixed;
   top: 15px;
   left: 20px;
   right: 20px;
@@ -14,7 +14,6 @@
   box-shadow: var(--glass-shadow);
   border-radius: var(--border-radius-lg);
   padding: 0 24px;
-  z-index: 1000; /* Sobre el mapa */
   box-sizing: border-box;
 }
 

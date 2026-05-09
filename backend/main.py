@@ -185,6 +185,47 @@ def consultar_trafico(
         "total_historico_mes": total_base,
     }
 
+@app.get("/api/trafico-simulado")
+def trafico_simulado():
+    deptos = ["GUATEMALA", "SACATEPEQUEZ", "ESCUINTLA", "BAJA VERAPAZ", "ALTA VERAPAZ",
+              "CHIMALTENANGO", "CHIQUIMULA", "EL PROGRESO", "HUEHUETENANGO", "IZABAL",
+              "JALAPA", "JUTIAPA", "PETEN", "QUETZALTENANGO", "QUICHE", "RETALHULEU",
+              "SAN MARCOS", "SANTA ROSA", "SOLOLA", "SUCHITEPEQUEZ", "TOTONICAPAN", "ZACAPA",
+              "MAZATENANGO"]
+    hora = datetime.now().hour
+    resultados = {}
+    for d in deptos:
+        total = totales_por_depto.get(d, 500000)
+        if (7 <= hora <= 9) or (17 <= hora <= 19):
+            factor = random.uniform(0.12, 0.28)
+            estado = random.choice(["HORA PICO - Tráfico Pesado", "HORA PICO - Congestión Alta"])
+        elif 22 <= hora or hora <= 5:
+            factor = random.uniform(0.01, 0.04)
+            estado = random.choice(["Fluidez Alta - Madrugada", "Tráfico Mínimo"])
+        else:
+            factor = random.uniform(0.05, 0.12)
+            estado = random.choice(["Tráfico Moderado", "Tráfico Normal", "Fluidez Media"])
+        vehiculos = int(total * factor)
+        carros = int(carros_por_depto.get(d, 0))
+        motos = int(motos_por_depto.get(d, 0))
+        nivel = "bajo"
+        if vehiculos > 50000: nivel = "medio"
+        if vehiculos > 100000: nivel = "alto"
+        if vehiculos > 200000: nivel = "critico"
+        resultados[d] = {
+            "estado": estado,
+            "vehiculos_ahora": vehiculos,
+            "carros": carros,
+            "motos": motos,
+            "nivel": nivel,
+            "color": "#dc3545" if nivel in ("alto","critico") else ("#ffc107" if nivel == "medio" else "#28a745")
+        }
+    return {
+        "timestamp": datetime.now().isoformat(),
+        "hora": hora,
+        "departamentos": resultados
+    }
+
 @app.get("/api/conteo/{departamento}")
 async def get_conteo(departamento: str):
     depto_buscado = limpiar_texto(departamento)

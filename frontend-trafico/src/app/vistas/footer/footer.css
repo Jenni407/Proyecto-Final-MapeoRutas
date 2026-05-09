@@ -1,5 +1,5 @@
 .footer-container {
-  position: absolute;
+  position: fixed;
   bottom: 20px;
   right: 24px;
   background: var(--glass-bg);
@@ -9,7 +9,6 @@
   box-shadow: var(--glass-shadow);
   border-radius: var(--border-radius-pill);
   padding: 10px 20px;
-  z-index: 1000; /* Sobre el mapa */
   transition: var(--transition-normal);
 } 
 
